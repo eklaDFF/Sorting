@@ -38,6 +38,16 @@ public class Main {
         for (int n : arrShell){
             System.out.print(n + ",");
         }
+
+
+
+        System.out.println("\n-------------------Example for Merge Sort-----------------");
+        int[] arrMerge = {45,67,33,42,90,23,-9};
+        MergeSort(arrMerge);
+
+        for (int n : arrMerge){
+            System.out.print(n + ",");
+        }
     }
     public static void BubbleSort(int[] arr){
         for(int i= arr.length-2;i>=0;i--){
@@ -100,5 +110,43 @@ public class Main {
 
         //When the gap becomes 1
 //        InsertionSort(arr);
+    }
+
+    public static void MergeSort(int[] arr){
+        divide(arr,0,arr.length-1);
+    }
+    public static void divide(int[] arr,int startIndex,int endIndex){
+        if (startIndex>=endIndex){
+            return;
+        }
+        int midIndex = startIndex + (endIndex-startIndex)/2;
+        divide(arr,startIndex,midIndex); // Dividing Left Part of the Array
+        divide(arr,midIndex+1,endIndex);
+        conquer(arr,startIndex,midIndex,endIndex);
+    }
+    public static void conquer(int[] arr,int startIndex,int midIndex,int endIndex){
+        int[] tempArr = new int[endIndex-startIndex+1];
+
+        int i = startIndex; // pointer for 1st part of array
+        int j = midIndex+1; // pointer for 2nd part of array
+        int k = 0; //to track index of tempArr
+
+        while (i<=midIndex & j<=endIndex){
+            tempArr[k++] = (arr[i]>arr[j]) ? arr[j++]:arr[i++];
+        }
+
+        while (i<=midIndex){
+            tempArr[k++] = arr[i++];
+        }
+
+        while (j<=endIndex){
+            tempArr[k++] = arr[j++];
+        }
+
+        //copying tempArr into original one
+        int ii = startIndex;
+        for (int a:tempArr){
+            arr[ii++] = a;
+        }
     }
 }
