@@ -28,6 +28,16 @@ public class Main {
         for (int n : arrInsertion){
             System.out.print(n + ",");
         }
+
+
+
+        System.out.println("\n-------------------Example for Shell Sort-----------------");
+        int[] arrShell = {45,67,33,42,90,23,-9};
+        ShellSort(arrShell);
+
+        for (int n : arrShell){
+            System.out.print(n + ",");
+        }
     }
     public static void BubbleSort(int[] arr){
         for(int i= arr.length-2;i>=0;i--){
@@ -68,5 +78,27 @@ public class Main {
                 }
             }
         }
+    }
+
+    public static void ShellSort(int[] arr){
+        int gap;
+        gap = (arr.length)/2;
+        while (gap>=1){
+            for (int i=gap;i<arr.length;i+=gap){
+                for (int j=i;j>0;j-=gap){
+                    if (arr[j]<arr[j-gap]){
+                        int t = arr[j];
+                        arr[j] = arr[j-gap];
+                        arr[j-gap] = t;
+                    }else {
+                        break;
+                    }
+                }
+            }
+            gap/=2;
+        }
+
+        //When the gap becomes 1
+//        InsertionSort(arr);
     }
 }
