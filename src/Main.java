@@ -48,6 +48,16 @@ public class Main {
         for (int n : arrMerge){
             System.out.print(n + ",");
         }
+
+
+
+        System.out.println("\n-------------------Example for Quick Sort-----------------");
+        int[] arrQuick = {45,67,33,42,90,23,-9};
+        QuickSort(arrQuick,0,arrQuick.length-1);
+
+        for (int n : arrQuick){
+            System.out.print(n + ",");
+        }
     }
     public static void BubbleSort(int[] arr){
         for(int i= arr.length-2;i>=0;i--){
@@ -148,5 +158,38 @@ public class Main {
         for (int a:tempArr){
             arr[ii++] = a;
         }
+    }
+
+    public static void QuickSort(int[] arr,int startIndex,int endIndex){
+        if (startIndex>=endIndex){
+            return;
+        }
+        int pivotIndex = partition(arr,startIndex,endIndex);
+
+        // Calling the Quick Sort Recursively on left and right side
+        QuickSort(arr,startIndex,pivotIndex-1);
+        QuickSort(arr,pivotIndex+1,endIndex);
+    }
+    public static int partition(int[] arr,int startIndex,int endIndex){
+        int pivot = endIndex;
+        int i = startIndex-1;
+
+        for (int j=startIndex;j<endIndex;j++){
+            if (arr[j]<arr[pivot]){
+                i++;
+
+                // swapping
+                int t = arr[i];
+                arr[i] = arr[j];
+                arr[j] = t;
+            }
+        }
+
+        // putting our pivot at correct position
+        i++;
+        int t = arr[i];
+        arr[i] = arr[pivot];
+        arr[pivot] = t;
+        return i;
     }
 }
