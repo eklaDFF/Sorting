@@ -58,6 +58,16 @@ public class Main {
         for (int n : arrQuick){
             System.out.print(n + ",");
         }
+
+
+
+        System.out.println("\n-------------------Example for Counting Sort-----------------");
+        int[] arrCount = {45,67,33,42,90,23};
+        arrCount = CountingSort(arrCount);
+
+        for (int n : arrCount){
+            System.out.print(n + ",");
+        }
     }
     public static void BubbleSort(int[] arr){
         for(int i= arr.length-2;i>=0;i--){
@@ -191,5 +201,39 @@ public class Main {
         arr[i] = arr[pivot];
         arr[pivot] = t;
         return i;
+    }
+
+    public static int[] CountingSort(int[] arr){
+        //Finding the max element;
+        int max = arr[0];
+        for (int n : arr){
+            if (n>max){
+                max = n;
+            }
+        }
+
+        // countArr to store frequency of element
+        int[] countArr = new int[max+1];
+
+        // storing frequency of elements in countArr
+        for (int n : arr){
+            countArr[n] += 1;
+        }
+
+        // cumulative addition of countArr
+        for(int i=1;i< countArr.length;i++){
+            countArr[i] = countArr[i-1] + countArr[i];
+        }
+
+        // creating outputArr
+        int[] outPutArr = new int[arr.length];
+
+        // traversing input arr from last and doing logics of Counting Sort
+        for (int i=arr.length-1;i>=0;i--){
+            outPutArr[countArr[arr[i]]-1] = arr[i];
+            countArr[arr[i]] -= 1;
+        }
+
+        return outPutArr;
     }
 }
